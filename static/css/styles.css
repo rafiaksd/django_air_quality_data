@@ -1,0 +1,22 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f4f8;
+    color: #333;
+}
+
+.navbar {
+    background-color: #007bff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand, .nav-link {
+    color: #fff !important;
+}
+
+td.api-url, th.api-url {
+    max-width: 250px;
+    word-wrap: break-word;
+    white-space: normal;
+    font-size: 12px;
+}
+
