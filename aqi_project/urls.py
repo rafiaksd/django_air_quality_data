@@ -1,22 +1,15 @@
-"""
-URL configuration for aqi_project project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.urls import path
+from aqi_app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('login/', views.login_view, name='login'),
+    path('logout/', views.logout_view, name='logout'),
+    path('dashboard/', views.dashboard, name='dashboard'),
+    path('edit_customer/<int:id>/', views.edit_customer, name='edit_customer'),
+    path('delete_customer/<int:id>/', views.delete_customer, name='delete_customer'),
+    path('sensor-data/', views.sensor_data, name='sensor_data'),
+    path('download-customers/', views.download_customers, name='download_customers'),
+    path('test-rate-limit/', views.test_rate_limit, name='test_rate_limit'),
 ]
