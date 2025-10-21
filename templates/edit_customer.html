@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title text-center mb-4">Edit Customer</h2>
+                <form method="post" action="{% url 'edit_customer' customer.id %}">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="name"
+                            name="name"
+                            value="{{ customer.name }}"
+                            required
+                        >
+                    </div>
+                    <div class="mb-3">
+                        <label for="api_url" class="form-label">API URL</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="api_url"
+                            name="api_url"
+                            value="{{ customer.api_url }}"
+                            required
+                        >
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input
+                            type="email"
+                            class="form-control"
+                            id="email"
+                            name="email"
+                            value="{{ customer.email }}"
+                        >
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone_number" class="form-label">Phone Number</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="phone_number"
+                            name="phone_number"
+                            value="{{ customer.phone_number }}"
+                        >
+                    </div>
+                    <div class="mb-3">
+                        <label for="sensor_location" class="form-label">Sensor Location</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="sensor_location"
+                            name="sensor_location"
+                            value="{{ customer.sensor_location }}"
+                        >
+                    </div>
+                    <div class="mb-3">
+                        <label for="notes" class="form-label">Notes</label>
+                        <textarea
+                            class="form-control"
+                            id="notes"
+                            name="notes"
+                            rows="4"
+                        >{{ customer.notes }}</textarea>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">Update Customer</button>
+                        <a href="{% url 'dashboard' %}" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

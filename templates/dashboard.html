@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="mt-5">
+    <h2 class="mb-4">Customer Dashboard</h2>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <h3 class="card-title">Add New Customer</h3>
+            <form method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="api_url" class="form-label">API URL</label>
+                        <input type="text" class="form-control" id="api_url" name="api_url" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="phone_number" class="form-label">Phone Number</label>
+                        <input type="text" class="form-control" id="phone_number" name="phone_number">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="sensor_location" class="form-label">Sensor Location</label>
+                    <input type="text" class="form-control" id="sensor_location" name="sensor_location">
+                </div>
+
+                <div class="mb-3">
+                    <label for="notes" class="form-label">Notes</label>
+                    <textarea class="form-control" id="notes" name="notes" rows="4"></textarea>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">Add Customer</button>
+                </div>
+            </form>
+
+            {% if new_password %}
+                <p class="success-message mt-3">New Customer Password: {{ new_password }}</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <h3 class="mb-3">Customers</h3>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Password</th>
+                    <th>API URL</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Sensor Location</th>
+                    <th>Sensor Name</th>
+                    <th>Notes</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for customer in customers %}
+                <tr>
+                    <td>{{ customer.id }}</td>
+                    <td>{{ customer.name }}</td>
+                    <td>{{ customer.password }}</td>
+                    <td>{{ customer.api_url }}</td>
+                    <td>{{ customer.email }}</td>
+                    <td>{{ customer.phone_number }}</td>
+                    <td>{{ customer.sensor_location }}</td>
+                    <td>{{ customer.sensor_name }}</td>
+                    <td>{{ customer.notes }}</td>
+                    <td>
+                        <a href="{% url 'edit_customer' customer.id %}" class="btn btn-primary btn-sm">Update</a>
+                        <a href="{% url 'delete_customer' customer.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this customer?')">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <a href="{% url 'download_customers' %}" class="btn btn-primary mt-3">Download Customers CSV</a>
+</div>
+{% endblock %}
